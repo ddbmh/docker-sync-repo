@@ -9,10 +9,10 @@ Edit the images.txt of the repos for syncing
 
 Sample
 
-## need python 2.7
-## 设置目标阿里云仓库地址和namespace(--registry  registry.cn-hangzhou.aliyuncs.com/tzm-hz)
-## 设置要同步的仓库列表文件 --file images.txt
-## 设置从哪里同步 --docker_host=127.0.0.1:5000
+need python 2.7
+设置目标阿里云仓库地址和namespace(--registry  registry.cn-hangzhou.aliyuncs.com/tzm-hz)
+设置要同步的仓库列表文件 --file images.txt
+设置从哪里同步 --docker_host=127.0.0.1:5000
 python sync_images.py --registry registry.cn-hangzhou.aliyuncs.com/tzm-hz --file images.txt --docker_host=127.0.0.1:5000
 
 

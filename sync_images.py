@@ -13,7 +13,9 @@ def help():
    
 
 def sync_repo(client, registry, insecure_registry, repo):
-    old_repo_name = docker_host + "/" + repo
+    old_repo_name=repo
+    if docker_host!= None:
+        old_repo_name = docker_host + "/" + repo
     print "Pulling repository %s ..." % old_repo_name
     client.pull(old_repo_name, insecure_registry=insecure_registry)
 
@@ -44,7 +46,7 @@ def sync_repo(client, registry, insecure_registry, repo):
     print "Complete the sync of repository %s." % repo
 
 
-OLD_REGISTRY="127.0.0.1:5000"   # set source registry
+OLD_REGISTRY= None  # set source registry
 options = []
 DEFAULT_CONFIG_FILE = "./images.txt"
 DEFAULT_REGISTRY = 'registry.cn-hangzhou.aliyuncs.com/tzm-hz'
