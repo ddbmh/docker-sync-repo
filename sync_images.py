@@ -13,10 +13,11 @@ def help():
    
 
 def sync_repo(client, registry, insecure_registry, repo):
-    print "Pulling repository %s ..." % repo
-    client.pull(repo, insecure_registry=insecure_registry)
+    old_repo_name = OLD_REGISTRY + "/" + repo
+    print "Pulling repository %s ..." % old_repo_name
+    client.pull(old_repo_name, insecure_registry=insecure_registry)
 
-    images = client.images(name=repo)
+    images = client.images(name=old_repo_name)
 
     # Get the repo name without registry
     repo_name = repo
@@ -37,15 +38,16 @@ def sync_repo(client, registry, insecure_registry, repo):
             print "Tagging %s:%s %s:%s" % (repo, tag, new_repo_name, tag)
             client.tag(name, new_repo_name, tag, True)
             print "Pushing repository %s:%s..." % (new_repo_name, tag)
-            client.push(new_repo_name, tag=tag, insecure_registry=insecure_registry)
+            client.push(new_repo_name, tag=tag, insecure_registry=True)
         except Exception, e:
             traceback.print_exc()
     print "Complete the sync of repository %s." % repo
 
 
+OLD_REGISTRY="127.0.0.1:5000"   # set source registry
 options = []
 DEFAULT_CONFIG_FILE = "./images.txt"
-DEFAULT_REGISTRY = 'jadetest.cn.ibm.com:5000'
+DEFAULT_REGISTRY = 'registry.cn-hangzhou.aliyuncs.com/tzm-hz'
 INSECURE_REGISTRY = False
 
 docker_host = None
