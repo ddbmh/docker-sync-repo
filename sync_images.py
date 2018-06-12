@@ -13,7 +13,7 @@ def help():
    
 
 def sync_repo(client, registry, insecure_registry, repo):
-    old_repo_name = OLD_REGISTRY + "/" + repo
+    old_repo_name = docker_host + "/" + repo
     print "Pulling repository %s ..." % old_repo_name
     client.pull(old_repo_name, insecure_registry=insecure_registry)
 
@@ -50,7 +50,7 @@ DEFAULT_CONFIG_FILE = "./images.txt"
 DEFAULT_REGISTRY = 'registry.cn-hangzhou.aliyuncs.com/tzm-hz'
 INSECURE_REGISTRY = False
 
-docker_host = None
+docker_host = OLD_REGISTRY
 registry = DEFAULT_REGISTRY
 insecure_registry = INSECURE_REGISTRY
 filename = DEFAULT_CONFIG_FILE
@@ -85,7 +85,7 @@ if (input_name == ''):
 else:
     lines = [input_name]
 
-client = docker.Client(docker_host)
+client = docker.Client()
 for repo in lines:
     #Ignore comment
     if repo.startswith('#'):
